@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hb.mybatis.mapper">
+	<!-- select 속성은 3개 : id, resultType, parameterType -->
+	<select id="list" resultType="com.hb.mybatis.VO">
+		select * from hbmember order by idx
+	</select>
+	<select id="onelist" resultType="com.hb.mybatis.VO" parameterType="com.hb.mybatis.VO">
+		select * from hbmember where id=#{id} and pwd=#{pwd}
+	</select>
+	<!-- insert,update,delete는 resultType이 없다.(무조건 int) -->
+	<insert id="insert" parameterType="com.hb.mybatis.VO">
+		insert into hbmember values(hbmember_seq.nextval,#{id},#{pwd},#{name},#{age},#{addr})
+	</insert>
+	<delete id="delete" parameterType="com.hb.mybatis.VO">
+		delete from hbmember where id=#{id} and pwd=#{pwd}
+	</delete>
+	<update id="update" parameterType="com.hb.mybatis.VO">
+		update hbmember set name=#{name},age=#{age},addr=#{addr} where id=#{id} and pwd=#{pwd}
+	</update>
+</mapper>
